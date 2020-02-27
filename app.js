@@ -49,6 +49,18 @@ connection.connect(function(err) {
             // CREATE HERE
           });
       } else if (answers.action === 'BID') {
+        inquirer
+          .prompt([
+            {
+              type: 'input',
+              name: 'item',
+              message: 'What auction would you like to place a bid in?'
+            },
+            { type: 'input', name: 'bid', message: 'How much would you like to bid?' }
+          ])
+          .then(answers => {
+            // UPDATE HERE
+          });
       } else {
         // KILL PROGRAM
         console.log('Exiting program!');
