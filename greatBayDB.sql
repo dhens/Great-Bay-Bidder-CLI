@@ -10,6 +10,6 @@ USE greatBayDB;
 CREATE TABLE items (
   id INT NOT NULL AUTO_INCREMENT,
   itemName VARCHAR(45) NOT NULL,
-  price INT NOT NULL,
+  bid INT NOT NULL,
   PRIMARY KEY (id)
 );
