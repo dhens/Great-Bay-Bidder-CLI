@@ -46,7 +46,7 @@ connection.connect(function(err) {
             }
           ])
           .then(answers => {
-            // CREATE HERE
+            createItem(answers.item, answers.bid, answers.category)
           });
       } else if (answers.action === 'BID') {
       } else {
