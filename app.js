@@ -1,4 +1,4 @@
-var mysql = require("mysql");
+var mysql = require('mysql');
 const inquirer = require('inquirer');
 
 var connection = mysql.createConnection({
@@ -11,14 +11,51 @@ var connection = mysql.createConnection({
   user: 'root',
 
   // Your password
-  password: '',
-  database: 'ice_creamDB'
+  password: 'password',
+  database: 'greatBayDB'
 });
 
 connection.connect(function(err) {
   if (err) throw err;
-  console.log('connected as id ' + connection.threadId + '\n');
-  createItem();
+  console.log('Connected as id ' + connection.threadId + '\n');
+  inquirer
+    .prompt({
+      type: 'list',
+      name: 'action',
+      message: 'Would you like to [POST] an auction or [BID] on an auction?',
+      choices: ['POST', 'BID', 'EXIT']
+    })
+    .then(answers => {
+      if (answers.action === 'POST') {
+        inquirer
+          .prompt([
+            {
+              type: 'input',
+              name: 'item',
+              message: 'What is the item you would like to submit?'
+            },
+            {
+              type: 'input',
+              name: 'category',
+              message: 'What category would you like to place your auction in?'
+            },
+            {
+              type: 'input',
+              name: 'bid',
+              message: 'What would you like your starting bid to be?'
+            }
+          ])
+          .then(answers => {
+            // CREATE HERE
+          });
+      } else if (answers.action === 'BID') {
+      } else {
+        // KILL PROGRAM
+        console.log('Exiting program!');
+        connection.end();
+        process.exit();
+      }
+    });
 });
 
 function createItem() {
