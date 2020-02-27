@@ -17,8 +17,12 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
   if (err) throw err;
-  console.log('connected as id ' + connection.threadId + '\n');
-  createProduct();
+  console.log('Connected as id ' + connection.threadId + '\n');
+  inquirer.prompt({
+    type: 'list',
+    message: 'Would you like to [POST] an auction or [BID] on an auction?',
+    choices: ['POST', 'BID', 'EXIT']
+  });
 });
 
 function createProduct() {
