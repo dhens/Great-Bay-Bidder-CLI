@@ -42,7 +42,22 @@ connection.connect(function(err) {
             {
               type: 'input',
               name: 'bid',
-              message: 'What would you like your starting bid to be?'
+              message: 'What would you like your starting bid to be?',
+              validate: function (input) {
+                  // Declare function as asynchronous, and save the done callback
+                  var done = this.async();
+               
+                  // Do async stuff
+                  setTimeout(function() {
+                    if (typeof input !== 'number') {
+                      // Pass the return value in the done callback
+                      done('You need to provide a number');
+                      return;
+                    }
+                    // Pass the return value in the done callback
+                    done(null, true);
+                  }, 3000);
+                }
             }
           ])
           .then(answers => {
