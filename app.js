@@ -18,63 +18,7 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
   console.log('Connected as id ' + connection.threadId + '\n');
-<<<<<<< HEAD
-  inquirer
-    .prompt({
-      type: 'list',
-      name: 'action',
-      message: 'Would you like to [POST] an auction or [BID] on an auction?',
-      choices: ['POST', 'BID', 'EXIT']
-    })
-    .then(answers => {
-      if (answers.action === 'POST') {
-        inquirer
-          .prompt([
-            {
-              type: 'input',
-              name: 'item',
-              message: 'What is the item you would like to submit?'
-            },
-            {
-              type: 'input',
-              name: 'category',
-              message: 'What category would you like to place your auction in?'
-            },
-            {
-              type: 'input',
-              name: 'bid',
-              message: 'What would you like your starting bid to be?',
-              validate: function (input) {
-                  // Declare function as asynchronous, and save the done callback
-                  var done = this.async();
-               
-                  // Do async stuff
-                  setTimeout(function() {
-                    if (typeof input !== 'number') {
-                      // Pass the return value in the done callback
-                      done('You need to provide a number');
-                      return;
-                    }
-                    // Pass the return value in the done callback
-                    done(null, true);
-                  }, 3000);
-                }
-            }
-          ])
-          .then(answers => {
-            // CREATE HERE
-          });
-      } else if (answers.action === 'BID') {
-      } else {
-        // KILL PROGRAM
-        console.log('Exiting program!');
-        connection.end();
-        process.exit();
-      }
-    });
-=======
   runProgram();
->>>>>>> 20c6a8a2a16d216455f3103bcdb578f76e676b62
 });
 
 const runProgram = () => {
