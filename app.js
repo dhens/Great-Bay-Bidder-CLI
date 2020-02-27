@@ -18,6 +18,7 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
   console.log('Connected as id ' + connection.threadId + '\n');
+<<<<<<< HEAD
   inquirer
     .prompt({
       type: 'list',
@@ -71,21 +72,79 @@ connection.connect(function(err) {
         process.exit();
       }
     });
+=======
+  runProgram();
+>>>>>>> 20c6a8a2a16d216455f3103bcdb578f76e676b62
 });
 
-function createItem() {
+const runProgram = () => {inquirer
+  .prompt({
+    type: 'list',
+    name: 'action',
+    message: 'Would you like to [POST] an auction or [BID] on an auction?',
+    choices: ['POST', 'BID', 'EXIT']
+  })
+  .then(answers => {
+    if (answers.action === 'POST') {
+      inquirer
+        .prompt([
+          {
+            type: 'input',
+            name: 'item',
+            message: 'What is the item you would like to submit?'
+          },
+          {
+            type: 'input',
+            name: 'category',
+            message: 'What category would you like to place your auction in?'
+          },
+          {
+            type: 'input',
+            name: 'bid',
+            message: 'What would you like your starting bid to be?'
+          }
+        ])
+        .then(answers => {
+          // CREATE HERE
+          createItem(answers.item, answers.bid, answer.category)
+        });
+    } else if (answers.action === 'BID') {
+      inquirer
+        .prompt([
+          {
+            type: 'input',
+            name: 'item',
+            message: 'What auction would you like to place a bid in?'
+          },
+          { type: 'input', name: 'bid', message: 'How much would you like to bid?' }
+        ])
+        .then(answers => {
+          // UPDATE HERE
+        });
+    } else {
+      // KILL PROGRAM
+      console.log('Exiting program!');
+      connection.end();
+      process.exit();
+    }
+  });
+
+}
+
+function createItem(item, bid, category) {
   console.log('Inserting a new item...\n');
   var query = connection.query(
     'INSERT INTO items SET ?',
     {
-      itemName: 'Toothpick',
-      bid: 345.00,
+      category,
+      item,
+      bid
     },
     function(err, res) {
       if (err) throw err;
       console.log(res.affectedRows + ' Item inserted!\n');
       // Call updateProduct AFTER the INSERT completes
-      updateItem();
+      updateItem(item, bid, category);
     }
   );
 
@@ -93,16 +152,19 @@ function createItem() {
   console.log(query.sql);
 }
 
-function updateItem() {
+function updateItem(item, bid, category) {
   console.log('Updating bid...\n');
   var query = connection.query(
     'UPDATE products SET ? WHERE ?',
     [
       {
-        bid: //User response
+        bid
       },
       {
-        itemnName: //User response
+        item
+      },
+      {
+          category
       }
     ],
     function(err, res) {
