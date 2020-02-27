@@ -9,6 +9,7 @@ USE greatBayDB;
 
 CREATE TABLE items (
   id INT NOT NULL AUTO_INCREMENT,
+  category VARCHAR(45) NOT NULL,
   itemName VARCHAR(45) NOT NULL,
   bid INT NOT NULL,
   PRIMARY KEY (id)
