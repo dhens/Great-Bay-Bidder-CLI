@@ -1,4 +1,4 @@
-var mysql = require("mysql");
+var mysql = require('mysql');
 const inquirer = require('inquirer');
 
 var connection = mysql.createConnection({
@@ -11,8 +11,8 @@ var connection = mysql.createConnection({
   user: 'root',
 
   // Your password
-  password: '',
-  database: 'ice_creamDB'
+  password: 'password',
+  database: 'greatBayDB'
 });
 
 connection.connect(function(err) {
@@ -20,6 +20,7 @@ connection.connect(function(err) {
   console.log('Connected as id ' + connection.threadId + '\n');
   inquirer.prompt({
     type: 'list',
+    name: 'action',
     message: 'Would you like to [POST] an auction or [BID] on an auction?',
     choices: ['POST', 'BID', 'EXIT']
   });
