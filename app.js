@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 var mysql = require("mysql");
 const inquirer = require('inquirer');
-=======
-var mysql = require('mysql');
->>>>>>> 267f04cf3a76fbf6116bbd7d0dda9135000fa218
 
 var connection = mysql.createConnection({
   host: 'localhost',
