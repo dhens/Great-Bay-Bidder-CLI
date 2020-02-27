@@ -106,7 +106,7 @@ const runProgram = () => {inquirer
         ])
         .then(answers => {
           // CREATE HERE
-          createItem(answers.item, answers.bid, answer.category)
+          createItem(answers.item, answers.bid, answers.category)
         });
     } else if (answers.action === 'BID') {
       inquirer
@@ -120,6 +120,7 @@ const runProgram = () => {inquirer
         ])
         .then(answers => {
           // UPDATE HERE
+          updateItem()
         });
     } else {
       // KILL PROGRAM
@@ -144,7 +145,7 @@ function createItem(item, bid, category) {
       if (err) throw err;
       console.log(res.affectedRows + ' Item inserted!\n');
       // Call updateProduct AFTER the INSERT completes
-      updateItem(item, bid, category);
+      updateItem(item, bid);
     }
   );
 
@@ -152,7 +153,7 @@ function createItem(item, bid, category) {
   console.log(query.sql);
 }
 
-function updateItem(item, bid, category) {
+function updateItem(item, bid) {
   console.log('Updating bid...\n');
   var query = connection.query(
     'UPDATE products SET ? WHERE ?',
@@ -162,9 +163,6 @@ function updateItem(item, bid, category) {
       },
       {
         item
-      },
-      {
-          category
       }
     ],
     function(err, res) {
