@@ -27,6 +27,27 @@ connection.connect(function(err) {
     })
     .then(answers => {
       if (answers.action === 'POST') {
+        inquirer
+          .prompt([
+            {
+              type: 'input',
+              name: 'itemName',
+              message: 'What is the item you would like to submit?'
+            },
+            {
+              type: 'input',
+              name: 'category',
+              message: 'What category would you like to place your auction in?'
+            },
+            {
+              type: 'input',
+              name: 'bid',
+              message: 'What would you like your starting bid to be?'
+            }
+          ])
+          .then(answers => {
+            // CREATE HERE
+          });
       } else if (answers.action === 'BID') {
       } else {
       }
