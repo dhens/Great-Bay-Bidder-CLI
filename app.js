@@ -29,6 +29,10 @@ connection.connect(function(err) {
       if (answers.action === 'POST') {
       } else if (answers.action === 'BID') {
       } else {
+        // KILL PROGRAM
+        console.log('Exiting program!')
+        connection.end();
+        process.exit();
       }
     });
 });
