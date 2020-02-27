@@ -50,6 +50,10 @@ connection.connect(function(err) {
           });
       } else if (answers.action === 'BID') {
       } else {
+        // KILL PROGRAM
+        console.log('Exiting program!')
+        connection.end();
+        process.exit();
       }
     });
 });
