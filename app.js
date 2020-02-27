@@ -87,7 +87,7 @@ function updateItem() {
         bid: //User response
       },
       {
-        itemnName: //User response
+        itemName: //User response
       }
     ],
     function(err, res) {
