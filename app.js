@@ -1,38 +1,42 @@
+<<<<<<< HEAD
 var mysql = require("mysql");
 const inquirer = require('inquirer');
+=======
+var mysql = require('mysql');
+>>>>>>> 267f04cf3a76fbf6116bbd7d0dda9135000fa218
 
 var connection = mysql.createConnection({
-  host: "localhost",
+  host: 'localhost',
 
   // Your port; if not 3306
   port: 3306,
 
   // Your username
-  user: "root",
+  user: 'root',
 
   // Your password
-  password: "",
-  database: "ice_creamDB"
+  password: '',
+  database: 'ice_creamDB'
 });
 
 connection.connect(function(err) {
   if (err) throw err;
-  console.log("connected as id " + connection.threadId + "\n");
+  console.log('connected as id ' + connection.threadId + '\n');
   createProduct();
 });
 
 function createProduct() {
-  console.log("Inserting a new product...\n");
+  console.log('Inserting a new product...\n');
   var query = connection.query(
-    "INSERT INTO products SET ?",
+    'INSERT INTO products SET ?',
     {
-      flavor: "Rocky Road",
+      flavor: 'Rocky Road',
       price: 3.0,
       quantity: 50
     },
     function(err, res) {
       if (err) throw err;
-      console.log(res.affectedRows + " product inserted!\n");
+      console.log(res.affectedRows + ' product inserted!\n');
       // Call updateProduct AFTER the INSERT completes
       updateProduct();
     }
@@ -43,20 +47,20 @@ function createProduct() {
 }
 
 function updateProduct() {
-  console.log("Updating all Rocky Road quantities...\n");
+  console.log('Updating all Rocky Road quantities...\n');
   var query = connection.query(
-    "UPDATE products SET ? WHERE ?",
+    'UPDATE products SET ? WHERE ?',
     [
       {
         quantity: 100
       },
       {
-        flavor: "Rocky Road"
+        flavor: 'Rocky Road'
       }
     ],
     function(err, res) {
       if (err) throw err;
-      console.log(res.affectedRows + " products updated!\n");
+      console.log(res.affectedRows + ' products updated!\n');
       // Call deleteProduct AFTER the UPDATE completes
       deleteProduct();
     }
@@ -67,15 +71,15 @@ function updateProduct() {
 }
 
 function deleteProduct() {
-  console.log("Deleting all strawberry icecream...\n");
+  console.log('Deleting all strawberry icecream...\n');
   connection.query(
-    "DELETE FROM products WHERE ?",
+    'DELETE FROM products WHERE ?',
     {
-      flavor: "strawberry"
+      flavor: 'strawberry'
     },
     function(err, res) {
       if (err) throw err;
-      console.log(res.affectedRows + " products deleted!\n");
+      console.log(res.affectedRows + ' products deleted!\n');
       // Call readProducts AFTER the DELETE completes
       readProducts();
     }
@@ -83,8 +87,8 @@ function deleteProduct() {
 }
 
 function readProducts() {
-  console.log("Selecting all products...\n");
-  connection.query("SELECT * FROM products", function(err, res) {
+  console.log('Selecting all products...\n');
+  connection.query('SELECT * FROM products', function(err, res) {
     if (err) throw err;
     // Log all results of the SELECT statement
     console.log(res);
