@@ -58,20 +58,20 @@ connection.connect(function(err) {
     });
 });
 
-function createItem(itemName, bid) {
+function createItem(item, bid, category) {
   console.log('Inserting a new item...\n');
   var query = connection.query(
     'INSERT INTO items SET ?',
     {
-      category: //user input
-      itemName: //user input,
-      bid: //user input,
+      category,
+      item,
+      bid
     },
     function(err, res) {
       if (err) throw err;
       console.log(res.affectedRows + ' Item inserted!\n');
       // Call updateProduct AFTER the INSERT completes
-      updateItem(itemName, bid);
+      updateItem(item, bid, category);
     }
   );
 
@@ -79,7 +79,7 @@ function createItem(itemName, bid) {
   console.log(query.sql);
 }
 
-function updateItem(itemName, bid) {
+function updateItem(item, bid, category) {
   console.log('Updating bid...\n');
   var query = connection.query(
     'UPDATE products SET ? WHERE ?',
@@ -88,7 +88,10 @@ function updateItem(itemName, bid) {
         bid
       },
       {
-        itemName
+        item
+      },
+      {
+          category
       }
     ],
     function(err, res) {
