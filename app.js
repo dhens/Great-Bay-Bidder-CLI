@@ -63,8 +63,9 @@ function createItem() {
   var query = connection.query(
     'INSERT INTO items SET ?',
     {
-      itemName: 'Toothpick',
-      bid: 345.00,
+      category: //user input
+      itemName: //user input,
+      bid: //user input,
     },
     function(err, res) {
       if (err) throw err;
