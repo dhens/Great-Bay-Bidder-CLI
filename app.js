@@ -31,7 +31,7 @@ connection.connect(function(err) {
           .prompt([
             {
               type: 'input',
-              name: 'itemName',
+              name: 'item',
               message: 'What is the item you would like to submit?'
             },
             {
@@ -51,7 +51,7 @@ connection.connect(function(err) {
       } else if (answers.action === 'BID') {
       } else {
         // KILL PROGRAM
-        console.log('Exiting program!')
+        console.log('Exiting program!');
         connection.end();
         process.exit();
       }
