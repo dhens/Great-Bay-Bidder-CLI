@@ -89,7 +89,7 @@ function createItem(item, bid, category) {
       if (err) throw err;
       console.log(res.affectedRows + ' Item inserted!\n');
       // Call updateProduct AFTER the INSERT completes
-      updateItem(item, bid, category);
+      updateItem(item, bid);
     }
   );
 
@@ -97,7 +97,7 @@ function createItem(item, bid, category) {
   console.log(query.sql);
 }
 
-function updateItem(item, bid, category) {
+function updateItem(item, bid) {
   console.log('Updating bid...\n');
   var query = connection.query(
     'UPDATE products SET ? WHERE ?',
