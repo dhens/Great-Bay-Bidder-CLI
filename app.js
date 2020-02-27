@@ -18,12 +18,19 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
   console.log('Connected as id ' + connection.threadId + '\n');
-  inquirer.prompt({
-    type: 'list',
-    name: 'action',
-    message: 'Would you like to [POST] an auction or [BID] on an auction?',
-    choices: ['POST', 'BID', 'EXIT']
-  });
+  inquirer
+    .prompt({
+      type: 'list',
+      name: 'action',
+      message: 'Would you like to [POST] an auction or [BID] on an auction?',
+      choices: ['POST', 'BID', 'EXIT']
+    })
+    .then(answers => {
+      if (answers.action === 'POST') {
+      } else if (answers.action === 'BID') {
+      } else {
+      }
+    });
 });
 
 function createProduct() {
