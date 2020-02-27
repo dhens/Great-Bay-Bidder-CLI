@@ -50,7 +50,7 @@ const runProgram = () => {inquirer
         ])
         .then(answers => {
           // CREATE HERE
-          createItem(answers.item, answers.bid, answer.category)
+          createItem(answers.item, answers.bid, answers.category)
         });
     } else if (answers.action === 'BID') {
       inquirer
@@ -64,6 +64,7 @@ const runProgram = () => {inquirer
         ])
         .then(answers => {
           // UPDATE HERE
+          updateItem()
         });
     } else {
       // KILL PROGRAM
@@ -106,9 +107,6 @@ function updateItem(item, bid, category) {
       },
       {
         item
-      },
-      {
-          category
       }
     ],
     function(err, res) {
